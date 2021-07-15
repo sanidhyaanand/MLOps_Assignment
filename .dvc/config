@@ -1,6 +1,8 @@
 [core]
-    remote = storage
+    remote = alt_storage
 [cache]
     dir = ../../external_cache
 ['remote "storage"']
     url = s3://sanidhyasbucket/datastore
+['remote "alt_storage"']
+    url = s3://mlopsdvc19d170027/datastore
