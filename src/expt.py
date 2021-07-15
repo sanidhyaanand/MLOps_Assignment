@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[54]:
+# In[58]:
 
 
 import numpy as np
@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 import dvc.api
 from sklearn.model_selection import train_test_split
 from sklearn import tree, metrics
+from sklearn.ensemble import RandomForestClassifier
 import pickle
 import json
 
@@ -55,16 +56,21 @@ train_df.to_csv("../data/processed/train.csv")
 test_df.to_csv("../data/processed/test.csv")
 
 
-# In[48]:
+# In[59]:
 
 
 # training and prediction step
-clf = tree.DecisionTreeClassifier(criterion = "entropy")
+
+# clf = tree.DecisionTreeClassifier(criterion = "entropy")
+# clf = clf.fit(X_train, y_train)
+# y_pred = clf.predict(X_test)
+
+clf = RandomForestClassifier(n_estimators=100, criterion = "entropy")
 clf = clf.fit(X_train, y_train)
 y_pred = clf.predict(X_test)
 
 
-# In[49]:
+# In[60]:
 
 
 # saving model
@@ -72,7 +78,7 @@ filename = "../models/model.pkl"
 pickle.dump(clf, open(filename, 'wb'))
 
 
-# In[56]:
+# In[61]:
 
 
 print("Accuracy:", metrics.accuracy_score(y_test, y_pred))
@@ -81,7 +87,7 @@ print("Weighted F1 Score:", metrics.f1_score(y_test, y_pred, average = 'weighted
 results = "Accuracy: " +  str(metrics.accuracy_score(y_test, y_pred)) + "\n" + "Weighted F1 Score:" + str(metrics.f1_score(y_test, y_pred, average = 'weighted'))
 
 
-# In[57]:
+# In[62]:
 
 
 with open('../metrics/acc_f1.json', 'w', encoding='utf-8') as f:
