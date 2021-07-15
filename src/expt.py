@@ -5,7 +5,7 @@ import dvc.api
 from sklearn.model_selection import train_test_split
 
 # reading dataset
-with dvc.api.open(path = "data/creditcard.csv", repo = "https://github.com/sanidhyaanand/MLOps_Assignment") as fd:
+with dvc.api.open("data/creditcard.csv", repo = "https://github.com/sanidhyaanand/MLOps_Assignment") as fd:
     df = pd.read_csv(fd)
 
 #print(df.columns)
